@@ -1,0 +1,50 @@
+<html>
+    <body>  
+        
+        <p id="output"></p>
+    </body>
+    <script>
+
+        var burl = "https://api.binance.com";
+        var query = '/api/v3/ticker/24hr';
+        const symbols = ["KLAYUSDT"];
+
+        var url = burl + query;
+
+        // const obj = JSON.parse(url);
+        // console.log(obj);
+
+        setInterval(function() {
+
+        var ourRequest = new XMLHttpRequest();
+        
+        ourRequest.open('GET', url, true);
+        ourRequest.onload = function() {
+        // console.log(ourRequest.responseText);
+        // document.getElementById("output").innerHTML = ourRequest.responseText;
+        const txt = '{"name":"John", "age":30, "city":"New York"}'
+        const obj = JSON.parse(ourRequest.responseText);
+         
+
+        console.log(obj[0]);
+        var results = [];
+        var searchField = "name";
+        var searchVal = "my Name";
+        for (var i=0 ; i < obj.length ; i++)
+        {
+            if (obj.symbol == "KLAYUSDT") {
+                results.push(obj.list[i]);
+            }
+        }
+        console.log(results);
+        }
+        ourRequest.send();
+            
+        }, 1000);
+
+
+
+        
+
+    </script>
+</html>
